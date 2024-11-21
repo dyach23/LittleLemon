@@ -10,7 +10,12 @@ from .models import menu, booking
 from .serializers import menuSerializer, bookingSerializer
 # Create your views here.
 
-class bookingView(ModelViewSet):
+class bookingView(ListCreateAPIView):
+    queryset = booking.objects.all()
+    serializer_class = bookingSerializer
+    permission_classes = [IsAuthenticated]
+    
+class singleBookingView(RetrieveUpdateAPIView, DestroyAPIView):
     queryset = booking.objects.all()
     serializer_class = bookingSerializer
     permission_classes = [IsAuthenticated]
